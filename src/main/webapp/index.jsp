@@ -21,7 +21,7 @@
 <section class="reservation min1280px">
     <div class="reservation-container max1280px">
         <div class="reservation-title pos-relative">
-            <h2 class="fw-bold">곧 예매 오픈!!</h2>
+            <h2 class="fw-bold">곧 예매 오픈!!!</h2>
             <div class="title-absolute">
                 <img src="<%= contextPath %>/images/jaehun/main_page/hello.svg" alt="손_흔드는_아이콘">
             </div>
