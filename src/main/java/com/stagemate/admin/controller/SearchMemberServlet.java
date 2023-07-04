@@ -61,19 +61,19 @@ public class SearchMemberServlet extends HttpServlet {
 		if(pageNo==1) {
 			pageBar+="<span>"+left_double_arrow+"</span>";
 		}else {
-			pageBar+="<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"'>"+left_double_arrow+"</a>";
+			pageBar+="<a href='"+request.getRequestURI()+"?cPage="+(pageNo-1)+"&searchType="+type+"&searchKeyword="+keyword+"'>"+left_double_arrow+"</a>";
 		}
 		if(cPage==1) {
 			pageBar+="<span>"+left_arrow+"</span>";
 		}else {
-			pageBar+="<a href='"+request.getRequestURI()+"?cPage="+(cPage-1)+"'>"+left_arrow+"</a>";
+			pageBar+="<a href='"+request.getRequestURI()+"?cPage="+(cPage-1)+"&searchType="+type+"&searchKeyword="+keyword+"'>"+left_arrow+"</a>";
 		}
 		pageBar+="<div>";
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getRequestURI()+"?cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getRequestURI()+"?cPage="+pageNo+"&searchType="+type+"&searchKeyword="+keyword+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -81,13 +81,13 @@ public class SearchMemberServlet extends HttpServlet {
 		if(cPage==totalPage) {
 			pageBar+="<span>"+right_arrow+"</span>";
 		}else {
-			pageBar+="<a href='"+request.getRequestURI()+"?cPage="+(cPage+1)+"'>"+right_arrow+"</a>";
+			pageBar+="<a href='"+request.getRequestURI()+"?cPage="+(cPage+1)+"&searchType="+type+"&searchKeyword="+keyword+"'>"+right_arrow+"</a>";
 		}
 		
 		if(pageNo>totalPage) {
 			pageBar+="<span>"+right_double_arrow+"</span>";
 		}else {
-			pageBar+="<a href='"+request.getRequestURI()+"?cPage="+pageNo+"'>"+right_double_arrow+"</a>";
+			pageBar+="<a href='"+request.getRequestURI()+"?cPage="+pageNo+"&searchType="+type+"&searchKeyword="+keyword+"'>"+right_double_arrow+"</a>";
 		}
 		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/admin/admin_membermanage.jsp").forward(request, response);
