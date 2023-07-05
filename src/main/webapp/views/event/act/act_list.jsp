@@ -8,9 +8,9 @@ List<Event> acts = (List) request.getAttribute("act");
 List<EventUpfile> files = (List) request.getAttribute("files");
 List<EventWish> ew = (List) request.getAttribute("ew");
 List<EventReviewTBJH> er = (List) request.getAttribute("er");
-String text=(String) request.getAttribute("text");
-String theme=request.getParameter("theme");
-String searchtext=request.getParameter("searchtext");
+String text = (String) request.getAttribute("text");
+String theme = request.getParameter("theme");
+String searchtext = request.getParameter("searchtext");
 %>
 <!-- 본인이 따로 적용할 CSS 파일 및 style 태그 -->
 <link rel="stylesheet"
@@ -24,16 +24,19 @@ String searchtext=request.getParameter("searchtext");
 	<section class="min1280px">
 		<div class="max1280px">
 			<div id="maincontainer">
-				<div id="musical" >
+				<div id="musical">
 					<h2>연극</h2>
 					<div id="chioce_array">
-						<a onclick="changebolder(event)" class="bolderarray">마감일자순</a> | <a onclick="changebolder(event)">인기도순</a> | <a onclick="changebolder(event)">리뷰많은 순</a>
-						| <a onclick="changebolder(event)">제목순</a>
+						<a onclick="changebolder(event)" class="bolderarray">마감일자순</a> | <a
+							onclick="changebolder(event)">인기도순</a> | <a
+							onclick="changebolder(event)">리뷰많은 순</a> | <a
+							onclick="changebolder(event)">제목순</a>
 					</div>
 					<br>
 					<form id="event_search">
 						<div id="event_search">
-							<input id="input_search_text" type="text" placeholder="Search..." value="<%=theme!=null?searchtext:""%>">
+							<input id="input_search_text" type="text" placeholder="Search..."
+								value="<%=theme != null ? searchtext : ""%>">
 							<div id="search_button">
 								<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
 									xmlns="http://www.w3.org/2000/svg">
@@ -47,15 +50,18 @@ String searchtext=request.getParameter("searchtext");
 					<div id="choice">
 						<div>
 							<p>전체</p>
-							<input type="radio" name="searchtheme" <%=theme==null||theme.equals("전체")?"checked":"" %> value="전체">
+							<input type="radio" name="searchtheme"
+								<%=theme == null || theme.equals("전체") ? "checked" : ""%> value="전체">
 						</div>
 						<div>
 							<p>제목</p>
-							<input type="radio" name="searchtheme"<%=theme!=null&&theme.equals("제목")?"checked":"" %> value="제목">
+							<input type="radio" name="searchtheme"
+								<%=theme != null && theme.equals("제목") ? "checked" : ""%> value="제목">
 						</div>
 						<div>
 							<p>장소</p>
-							<input type="radio" name="searchtheme" <%=theme!=null&&theme.equals("장소")?"checked":"" %> value="장소">
+							<input type="radio" name="searchtheme"
+								<%=theme != null && theme.equals("장소") ? "checked" : ""%> value="장소">
 						</div>
 					</div>
 					<br> <br> <br>
@@ -71,47 +77,62 @@ String searchtext=request.getParameter("searchtext");
 						%>
 						<%
 						if ((a.getEventNo().equals(u.getEventNo())) && (u.getPurposeNo().equals("PUR1"))) {
-						%> 
+						%>
 						<div class="musical_product">
 							<img src="<%=contextPath%>/upload/joonho/<%=u.getEuRename()%>"
-								onclick="openprev('<%=a.getRsvOpenDt()%>','<%=a.getEventNo()%>')" width="250" height="350">
+								onclick="openprev('<%=a.getRsvOpenDt()%>','<%=a.getEventNo()%>')"
+								width="250" height="350">
 							<h4><%=a.getEventNm()%></h4>
 							<h5><%=a.getLocation()%></h5>
 							<div>
 								<div class="like">
-									<%String hearthave="heart";String classheart="empty";int ewsize=0;
-									if(ew!=null){
-									for(EventWish ews : ew){ %> 
-										<%
-										if(loginMember!=null&&a.getEventNo().equals(ews.getEventNo())&&loginMember.getMemberId().equals(ews.getMemberId())){ 
-											hearthave="fillheart"; classheart="fill";
-										}
-										%>
 									<%
-										if(a.getEventNo().equals(ews.getEventNo()))
-										{ewsize++;}%>
-									<%}}%>
+									String hearthave = "heart";
+									String classheart = "empty";
+									int ewsize = 0;
+									if (ew != null) {
+										for (EventWish ews : ew) {
+									%>
+									<%
+									if (loginMember != null && a.getEventNo().equals(ews.getEventNo())
+											&& loginMember.getMemberId().equals(ews.getMemberId())) {
+										hearthave = "fillheart";
+										classheart = "fill";
+									}
+									%>
+									<%
+									if (a.getEventNo().equals(ews.getEventNo())) {
+										ewsize++;
+									}
+									%>
+									<%
+									}
+									}
+									%>
 									<div id="likeheart">
-											<img onclick="switchheart(event,'<%=a.getEventNo() %>');" src="<%=contextPath%>/images/joonho/<%=hearthave %>.svg" class="<%=classheart%>"> 
+										<img onclick="switchheart(event,'<%=a.getEventNo()%>');"
+											src="<%=contextPath%>/images/joonho/<%=hearthave%>.svg"
+											class="<%=classheart%>">
 									</div>
-									<p><%=ewsize %></p>
+									<p><%=ewsize%></p>
 								</div>
-								<%int reviewcount=0; {
-								if(er!=null){
-								for(EventReviewTBJH ers:er){
-									if(ers.getEventNo().equals(a.getEventNo())){
+								<%
+								int reviewcount = 0;
+								{
+									if (er != null) {
+										for (EventReviewTBJH ers : er) {
+									if (ers.getEventNo().equals(a.getEventNo())) {
 										reviewcount++;
 									}
+										}
 									}
 								}
-								}
-								
 								%>
 								<div class="like">
 									<div>
 										<img src="<%=contextPath%>/images/joonho/text.svg" alt="">
 									</div>
-									<p><%=reviewcount %></p>
+									<p><%=reviewcount%></p>
 								</div>
 							</div>
 						</div>
@@ -135,8 +156,8 @@ String searchtext=request.getParameter("searchtext");
 	</section>
 	<!-----------   위에서 HTML 작업  ----------->
 	<%@ include file="/views/common/footer.jsp"%>
-	<script src="<%= contextPath %>/js/jquery-3.7.0.min.js"></script>
-	<script src="<%= contextPath %>/js/script_common.js"></script>
+	<script src="<%=contextPath%>/js/jquery-3.7.0.min.js"></script>
+	<script src="<%=contextPath%>/js/script_common.js"></script>
 	<!-- 본인이 따로 적용할 외부 JS 파일 및 script 태그 -->
 	<script>
 	if('<%=text%>'==null||'<%=text%>'=='마감일자순'){
@@ -156,7 +177,7 @@ String searchtext=request.getParameter("searchtext");
 		location.href="<%=contextPath%>/event/arrayact.do?text="+$(e.target).text()
 	}
 	const switchheart=(e,eventNo)=>{
-		if(<%=loginMember==null%>){
+		if(<%=loginMember == null%>){
 			alert("로그인 후 관심등록이 가능합니다.")
 		}else{
 			let countheart=parseInt($(e.target).parent().next().text())
@@ -170,7 +191,7 @@ String searchtext=request.getParameter("searchtext");
 		      $.ajax({
 		        url: "<%=contextPath%>/event/addHeart.do", 
 		        method: "POST",
-		        data: {eventNo:eventNo , memberId:'<%=loginMember!=null?loginMember.getMemberId():""%>' }, 
+		        data: {eventNo:eventNo , memberId:'<%=loginMember != null ? loginMember.getMemberId() : ""%>' }, 
 		        success: function(response) {
 		          console.log("데이터 등록 성공!");
 		        },
@@ -189,7 +210,7 @@ String searchtext=request.getParameter("searchtext");
 		      $.ajax({
 		        url: "<%=contextPath%>/event/removeHeart.do", 
 		        method: "POST", 
-		        data: { eventNo:eventNo , memberId:'<%=loginMember!=null?loginMember.getMemberId():""%>' }, 
+		        data: { eventNo:eventNo , memberId:'<%=loginMember != null ? loginMember.getMemberId() : ""%>' }, 
 		        success: function(response) {
 		          console.log("데이터 삭제 성공!");
 		        },
