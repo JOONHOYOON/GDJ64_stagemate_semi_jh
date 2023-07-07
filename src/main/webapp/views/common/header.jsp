@@ -66,7 +66,7 @@
          <div class="logout-content_msg">
             <% if (loginMember != null) { %>
                <% if (loginMember.getMemberId().equals("stageadmin")) { %>
-                  <h5><a href="<%= request.getContextPath() %>/admin/membermanage">관리자 페이지</a></h5>
+                  <h5><a href="<%= request.getContextPath() %>/myBatisMemberList.do">관리자 페이지</a></h5>
                <% } else { %>
                   <h5><a href="<%= request.getContextPath()%>/Detail/DetailListServlet.do">마이 페이지</a></h5>
             <% } } %>
